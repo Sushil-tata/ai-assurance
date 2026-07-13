@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InvestigationAgentInput",
+  "type": "object",
+  "required": ["correlation_id", "requesting_agent_id", "payload"],
+  "properties": {
+    "correlation_id": { "type": "string" },
+    "requesting_agent_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "payload": {
+      "type": "object",
+      "required": ["investigation_id", "request_type"],
+      "properties": {
+        "investigation_id": { "type": "string", "pattern": "^INV-[0-9]{4}-[0-9]{4}$" },
+        "request_type": { "type": "string", "enum": ["investigate", "answer_followup"] },
+        "followup_question": { "type": "string" }
+      },
+      "if": { "properties": { "request_type": { "const": "answer_followup" } } },
+      "then": { "required": ["followup_question"] }
+    }
+  }
+}
