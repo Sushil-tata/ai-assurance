@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "runtime/schemas/committee_report.json",
+  "title": "CommitteeReport",
+  "type": "object",
+  "required": [
+    "report_id",
+    "period",
+    "model_id",
+    "executive_conclusion",
+    "model_status",
+    "findings",
+    "root_causes",
+    "recommendation",
+    "decision_requested",
+    "action_owner",
+    "due_date"
+  ],
+  "properties": {
+    "report_id": { "type": "string" },
+    "period": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+    "model_id": { "type": "string" },
+    "executive_conclusion": { "type": "string" },
+    "model_status": { "type": "string", "enum": ["Green", "Amber", "Red"] },
+    "findings": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "root_causes": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "evidence_ids": { "type": "array", "items": { "type": "string" } },
+    "recommendation": { "type": "string" },
+    "decision_requested": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "approve_with_modification",
+        "request_further_analysis",
+        "reject",
+        "defer"
+      ]
+    },
+    "action_owner": { "type": "string" },
+    "due_date": { "type": "string", "format": "date" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  },
+  "examples": [
+    {
+      "report_id": "CR-2026-06-CC-B-01",
+      "period": "2026-06",
+      "model_id": "M-CC-B-01",
+      "executive_conclusion": "Amber status; controlled remediation recommended with approval gate.",
+      "model_status": "Amber",
+      "findings": [
+        "PSI is Amber with material population shift.",
+        "Bureau missingness increased and affected calibration."
+      ],
+      "root_causes": [
+        "Thin-file campaign mix shift",
+        "Upstream bureau missingness issue"
+      ],
+      "evidence_ids": ["EV-2026-06-001", "EV-2026-06-002", "EV-2026-06-004"],
+      "recommendation": "Approve with modification: enhanced monitoring and data remediation before recalibration consideration.",
+      "decision_requested": "approve_with_modification",
+      "action_owner": "Model Owner",
+      "due_date": "2026-08-15",
+      "generated_at": "2026-07-02T09:00:00Z"
+    }
+  ]
+}

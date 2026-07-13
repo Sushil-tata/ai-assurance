@@ -1,0 +1,29 @@
+{
+  "investigation_id": "INV-2026-06-CC-B-01",
+  "model_id": "M-CC-B-01",
+  "model_name": "CC Behaviour Score",
+  "period": "2026-06",
+  "trigger": "PSI Amber",
+  "hypotheses_tested": [
+    "thin_file_campaign_shift",
+    "bureau_missingness_issue",
+    "policy_population_change"
+  ],
+  "primary_cause": "Higher thin-file mix after campaign",
+  "contributing_factors": [
+    "Increased bureau feature missingness from upstream issue",
+    "Policy change altered the scored population"
+  ],
+  "unrelated_signals": [
+    "Short-term channel variance not persistent across cohorts"
+  ],
+  "confidence": "Medium",
+  "evidence_ids": [
+    "EV-2026-06-001",
+    "EV-2026-06-002",
+    "EV-2026-06-004",
+    "EV-2026-06-005"
+  ],
+  "recommended_action": "Enhanced monitoring and data remediation with human approval gate for material policy actions",
+  "completed_at": "2026-07-02T07:30:00Z"
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "runtime/schemas/evidence_package.json",
+  "title": "EvidencePackage",
+  "type": "object",
+  "required": ["investigation_id", "items", "policy_version", "generated_at"],
+  "properties": {
+    "investigation_id": { "type": "string" },
+    "policy_version": { "type": "string", "examples": ["MONITORING-1.0"] },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "evidence_id",
+          "source",
+          "table_or_document",
+          "timestamp",
+          "tool_call",
+          "metric",
+          "supported_conclusion"
+        ],
+        "properties": {
+          "evidence_id": { "type": "string" },
+          "source": { "type": "string" },
+          "table_or_document": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "tool_call": { "type": "string" },
+          "metric": { "type": "string" },
+          "supported_conclusion": { "type": "string" },
+          "contradicts": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "generated_at": { "type": "string", "format": "date-time" }
+  },
+  "examples": [
+    {
+      "investigation_id": "INV-2026-06-CC-B-01",
+      "policy_version": "MONITORING-1.0",
+      "items": [
+        {
+          "evidence_id": "EV-2026-06-002",
+          "source": "dq_pipeline",
+          "table_or_document": "dq_missingness_monthly",
+          "timestamp": "2026-07-01T10:10:00Z",
+          "tool_call": "GET_INVESTIGATION_EVIDENCE",
+          "metric": "bureau_missingness_increase_pp=4.7",
+          "supported_conclusion": "Bureau missingness is a contributing factor",
+          "contradicts": []
+        }
+      ],
+      "generated_at": "2026-07-01T10:20:00Z"
+    }
+  ]
+}

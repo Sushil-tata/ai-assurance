@@ -1,0 +1,37 @@
+{
+  "model_id": "M-CC-B-01",
+  "model_name": "CC Behaviour Score",
+  "period": "2026-06",
+  "product": "Credit Card",
+  "status": "Amber",
+  "metrics": {
+    "psi": 0.18,
+    "gini_change_pp": -2.5,
+    "oe_ratio": 1.14,
+    "applicability_violation_rate": 0.0
+  },
+  "signals": [
+    {
+      "code": "PSI_AMBER",
+      "detail": "Population shift exceeds Green range.",
+      "evidence_id": "EV-2026-06-001"
+    },
+    {
+      "code": "THIN_FILE_CAMPAIGN_SHIFT",
+      "detail": "Thin-file segment share increased after campaign.",
+      "evidence_id": "EV-2026-06-004"
+    },
+    {
+      "code": "BUREAU_MISSINGNESS_INCREASE",
+      "detail": "Key bureau features show increased missingness.",
+      "evidence_id": "EV-2026-06-002"
+    },
+    {
+      "code": "POLICY_POPULATION_CHANGE",
+      "detail": "Policy update changed scored cohort composition.",
+      "evidence_id": "EV-2026-06-005"
+    }
+  ],
+  "next_step": "Route to Investigation Specialist",
+  "generated_at": "2026-07-01T10:00:00Z"
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "runtime/schemas/investigation_request.json",
+  "title": "InvestigationRequest",
+  "type": "object",
+  "required": ["investigation_id", "model_id", "period", "trigger", "hypotheses"],
+  "properties": {
+    "investigation_id": { "type": "string", "examples": ["INV-2026-06-CC-B-01"] },
+    "model_id": { "type": "string", "examples": ["M-CC-B-01"] },
+    "period": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+    "trigger": { "type": "string", "examples": ["PSI Amber in monthly monitoring"] },
+    "hypotheses": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "requested_by": { "type": "string", "examples": ["Monitoring Specialist"] },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "examples": [
+    {
+      "investigation_id": "INV-2026-06-CC-B-01",
+      "model_id": "M-CC-B-01",
+      "period": "2026-06",
+      "trigger": "PSI Amber in monthly monitoring",
+      "hypotheses": [
+        "thin_file_campaign_shift",
+        "bureau_missingness_issue",
+        "policy_population_change"
+      ],
+      "requested_by": "Monitoring Specialist",
+      "created_at": "2026-07-01T10:15:00Z"
+    }
+  ]
+}

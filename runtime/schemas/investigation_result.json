@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "runtime/schemas/investigation_result.json",
+  "title": "InvestigationResult",
+  "type": "object",
+  "required": [
+    "investigation_id",
+    "model_id",
+    "period",
+    "primary_cause",
+    "contributing_factors",
+    "unrelated_signals",
+    "confidence",
+    "evidence_ids",
+    "completed_at"
+  ],
+  "properties": {
+    "investigation_id": { "type": "string" },
+    "model_id": { "type": "string" },
+    "period": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+    "primary_cause": { "type": "string" },
+    "contributing_factors": { "type": "array", "items": { "type": "string" } },
+    "unrelated_signals": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "string", "enum": ["High", "Medium", "Low"] },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "completed_at": { "type": "string", "format": "date-time" }
+  },
+  "examples": [
+    {
+      "investigation_id": "INV-2026-06-CC-B-01",
+      "model_id": "M-CC-B-01",
+      "period": "2026-06",
+      "primary_cause": "Higher thin-file mix after campaign",
+      "contributing_factors": [
+        "Increased bureau feature missingness from upstream issue",
+        "Policy change altered scored population"
+      ],
+      "unrelated_signals": [
+        "Short-lived channel fluctuation with no persistent trend"
+      ],
+      "confidence": "Medium",
+      "evidence_ids": ["EV-2026-06-001", "EV-2026-06-002", "EV-2026-06-004"],
+      "completed_at": "2026-07-02T07:30:00Z"
+    }
+  ]
+}

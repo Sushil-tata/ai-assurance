@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "runtime/schemas/governance_recommendation.json",
+  "title": "GovernanceRecommendation",
+  "type": "object",
+  "required": [
+    "recommendation_id",
+    "model_id",
+    "period",
+    "severity",
+    "recommended_action",
+    "requires_human_approval",
+    "evidence_ids",
+    "rationale"
+  ],
+  "properties": {
+    "recommendation_id": { "type": "string" },
+    "model_id": { "type": "string" },
+    "period": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+    "severity": { "type": "string", "enum": ["Green", "Amber", "Red"] },
+    "recommended_action": { "type": "string" },
+    "alternative_actions": { "type": "array", "items": { "type": "string" } },
+    "requires_human_approval": { "type": "boolean" },
+    "evidence_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "rationale": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "examples": [
+    {
+      "recommendation_id": "REC-2026-06-CC-B-01",
+      "model_id": "M-CC-B-01",
+      "period": "2026-06",
+      "severity": "Amber",
+      "recommended_action": "Enhanced monitoring plus data remediation",
+      "alternative_actions": ["Request further analysis", "Temporary use restriction"],
+      "requires_human_approval": true,
+      "evidence_ids": ["EV-2026-06-001", "EV-2026-06-002", "EV-2026-06-004"],
+      "rationale": "Combined shift pattern indicates material but controllable risk with immediate data-correction need.",
+      "created_at": "2026-07-02T08:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "runtime/schemas/monitoring_summary.json",
+  "title": "MonitoringSummary",
+  "type": "object",
+  "required": [
+    "model_id",
+    "period",
+    "product",
+    "status",
+    "metrics",
+    "signals",
+    "generated_at"
+  ],
+  "properties": {
+    "model_id": {
+      "type": "string",
+      "examples": ["M-CC-B-01"]
+    },
+    "period": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}$",
+      "examples": ["2026-06"]
+    },
+    "product": {
+      "type": "string",
+      "enum": ["Credit Card", "Speedy Cash", "Speedy Loan"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Green", "Amber", "Red"]
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["psi", "gini_change_pp", "oe_ratio", "applicability_violation_rate"],
+      "properties": {
+        "psi": { "type": "number", "minimum": 0 },
+        "gini_change_pp": { "type": "number" },
+        "oe_ratio": { "type": "number", "minimum": 0 },
+        "applicability_violation_rate": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "signals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["code", "severity", "evidence_id"],
+        "properties": {
+          "code": { "type": "string" },
+          "severity": { "type": "string", "enum": ["Green", "Amber", "Red"] },
+          "evidence_id": { "type": "string" }
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "examples": [
+    {
+      "model_id": "M-CC-B-01",
+      "period": "2026-06",
+      "product": "Credit Card",
+      "status": "Amber",
+      "metrics": {
+        "psi": 0.18,
+        "gini_change_pp": -2.5,
+        "oe_ratio": 1.14,
+        "applicability_violation_rate": 0.0
+      },
+      "signals": [
+        {
+          "code": "THIN_FILE_MIX_SHIFT",
+          "severity": "Amber",
+          "evidence_id": "EV-2026-06-001"
+        }
+      ],
+      "generated_at": "2026-07-01T10:00:00Z"
+    }
+  ]
+}
